@@ -10,24 +10,28 @@ public class PongGame extends SurfaceView {
 
     // Are we debugging?
     private final boolean DEBUGGING = true;
-
-    // These objects are needed to do the drawing
-    private SurfaceHolder surfaceHolder;
-    private Canvas canvas;
-    private Paint paint;
-
-    // How many frames per seconds did we get?
-    private long mFPS;
     // The number of milliseconds in a second
     private final int MILLIS_IN_SECOND = 1000;
-
+    // These objects are needed to do the drawing
+    private final SurfaceHolder surfaceHolder;
+    private Canvas canvas;
+    private final Paint paint;
+    // How many frames per seconds did we get?
+    private long mFPS;
     // Holds the screen resolution of the screen
-    private int screenX;
-    private int screenY;
+    private final int screenX;
+    private final int screenY;
     // How big will the text be ?
-    private int fontSize;
-    private int fontMargin;
+    private final int fontSize;
+    private final int fontMargin;
 
+    // The game objects
+    private Bat mBat;
+    private Ball mBall;
+
+    // The current score and lives remaining
+    private int mScore;
+    private int mLives;
 
     // The pong game constructor
     // Called when this line:
@@ -38,5 +42,38 @@ public class PongGame extends SurfaceView {
         // constructor of SurfaceView
         // Provided by android
         super(context);
+
+        // Initialize these two members/ fields
+        // With the values passed in as parameters
+        screenX = x;
+        screenY = y;
+
+        // Font is 20% (1/20th) of screen width
+        fontSize = screenX / 20;
+        //Margin is 1.5% (1/75th) of screen width
+        fontMargin = screenX / 75;
+
+        // Initialize the objects
+        // ready for drawing with
+        // getHolder() is a method of surfaceView
+        surfaceHolder = getHolder();
+        paint = new Paint();
+
+        // Initialize the bat and ball
+
+        // Everything is ready so start the game
+        startNewGame();
     }
+
+    // The player has just lost
+    // or is starting their first game
+    private void startNewGame() {
+        // put the ball back to the starting position
+
+        // reset the score and player chances
+        mScore = 0;
+        mLives = 3;
+    }
+
+    ̥
 }
