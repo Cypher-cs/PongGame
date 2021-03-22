@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -115,8 +116,41 @@ public class PongGame extends SurfaceView implements Runnable{
                 10, debugStart + debugSize, paint);
     }
 
+    // Here is the Thread and two control variables
+    private Thread mGameThread = null;
+    // This volatile variable can be accessed
+    // from inside and outside the thread
+    private volatile boolean mPlaying;
+    private boolean mPaused = true;
+
+    // This method is called by PongActivity class
+    // when the player quits the game
+    public void pause() {
+        // Set mPlaying to false
+        // Stopping the thread isn't
+        // always instant
+        mPlaying = false;
+        try {
+            // Stop the thread
+            mGameThread.join();
+        } catch (InterruptedException e) {
+            Log.e("Error: ", "joining thread");
+        }
+    }
+
+    // This method is called by PongActivity class
+    // When player starts the game
+    public void resume() {
+        mPlaying = true;
+
+        // Initialize the instance of Thread
+        mGameThread = new Thread(this);
+
+        // Start the thread
+        mGameThread.start();
+    }
+
     @Override
     public void run() {
-
     }
 }
