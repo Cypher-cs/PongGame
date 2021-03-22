@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class PongGame extends SurfaceView {
+public class PongGame extends SurfaceView implements Runnable{
 
     // Are we debugging?
     private final boolean DEBUGGING = true;
@@ -113,5 +113,10 @@ public class PongGame extends SurfaceView {
         paint.setTextSize(debugSize);
         canvas.drawText("FPS: " + mFPS ,
                 10, debugStart + debugSize, paint);
+    }
+
+    @Override
+    public void run() {
+
     }
 }
