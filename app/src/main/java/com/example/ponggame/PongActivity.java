@@ -6,7 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 
-public class MainActivity extends AppCompatActivity {
+public class PongActivity extends AppCompatActivity {
     private PongGame pongGame;
 
     @Override
